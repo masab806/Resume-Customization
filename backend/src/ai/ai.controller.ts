@@ -8,15 +8,16 @@ export class AiController {
 
     @Post("resume")
     async editResume(@Body() dto: ResumeDTO){
-       try {
-
             const result = await this.aiService.EditResumeWithAI(dto)
             
             return result
+    }
 
-       } catch (error) {
-            console.log("Error In Edit Resume (Controller): ", error)
-       }
+    @Post("email")
+    async generateEmail(@Body() dto: ResumeDTO){
+        const result = await this.aiService.generateEmail(dto)
+
+        return result
     }
 
 }
