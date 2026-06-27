@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
@@ -18,7 +18,21 @@ export class GeminiService {
             contents: prompt,
             config: {
                 systemInstruction: systemInstructions,
-                responseMimeType: "application/json"
+                responseMimeType: "application/json",
+                responseSchema: {
+                    type: Type.OBJECT,
+                    properties: {
+                        atsScore: {
+                            type: Type.INTEGER,
+                            description: "A calculated score out of 100 based on keyword alignment"
+                        },
+                        latex: {
+                            type: Type.STRING,
+                            description: "The complete modified LaTeX code with properly escaped backslashes"
+                        },
+                    },
+                    required: ["atsScore", "latex"]
+                }
             }
         })
 

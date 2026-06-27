@@ -34,4 +34,7 @@ Return exclusively a valid JSON object. Do not wrap the JSON in markdown code fe
 }
 
 Ensure that all special characters, newlines (\n), and quotes inside the LaTeX string are properly escaped so the JSON remains syntactically valid.
+
+CRITICAL FOR LATEX PROCESSING:
+Because the "latex" value is a raw code string, you MUST double-escape all backslashes inside the string (e.g., write "\\section" instead of "\section", and "\\\\" instead of "\\"). Ensure that quotes and newlines (\n) are cleanly escaped so the resulting string is fully parseable by JSON.parse().
 `
